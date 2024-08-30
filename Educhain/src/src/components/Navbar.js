@@ -3,19 +3,31 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({ account, onConnectWallet }) => {
     return (
-        <nav style={styles.navbar}>
-            <div style={styles.container}>
-                <h1 style={styles.logo}>Educhain</h1>
-                <ul style={styles.navLinks}>
-                    <li><Link to="/" style={styles.navLink}>Home</Link></li>
-                    <li><Link to="/marketplace" style={styles.navLink}>Marketplace</Link></li>
-                    <li><Link to="/add-nft" style={styles.navLink}>Add NFT</Link></li>
+        <nav className="bg-gray-900 p-4">
+            <div className="container mx-auto flex justify-between items-center">
+                <h1 className="text-white text-2xl font-bold">
+                    <img src="logo.svg" alt="logo" className="h-12 w-12 rounded-full" />
+                </h1>
+                <ul className="flex space-x-6">
+                    <li>
+                        <Link to="/marketplace" className="text-white hover:text-purple-500">
+                            Marketplace
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/add-nft" className="text-white hover:text-purple-500">
+                            Add NFT
+                        </Link>
+                    </li>
                 </ul>
-                <div style={styles.accountInfo}>
+                <div className='w-30'>
                     {account ? (
-                        `Connected: ${account}`
+                        <span className="text-white">{account.substring(0, 10)}...</span>
                     ) : (
-                        <button onClick={onConnectWallet} style={styles.connectButton}>
+                        <button
+                            onClick={onConnectWallet}
+                            className="bg-purple-700 text-white py-2 px-4 rounded-lg hover:bg-purple-900 transition duration-300"
+                        >
                             Connect Wallet
                         </button>
                     )}
@@ -23,49 +35,6 @@ const Navbar = ({ account, onConnectWallet }) => {
             </div>
         </nav>
     );
-};
-
-const styles = {
-    navbar: {
-        backgroundColor: '#333',
-        color: '#fff',
-        padding: '10px',
-    },
-    container: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    logo: {
-        margin: 0,
-    },
-    navLinks: {
-        listStyle: 'none',
-        margin: 0,
-        padding: 0,
-        display: 'flex',
-        gap: '15px',
-    },
-    navLink: {
-        color: '#fff',
-        textDecoration: 'none',
-    },
-    accountInfo: {
-        marginLeft: 'auto',
-    },
-    connectButton: {
-        backgroundColor: '#4CAF50',
-        color: 'white',
-        border: 'none',
-        padding: '10px 20px',
-        textAlign: 'center',
-        textDecoration: 'none',
-        display: 'inline-block',
-        fontSize: '16px',
-        margin: '4px 2px',
-        cursor: 'pointer',
-        borderRadius: '4px',
-    },
 };
 
 export default Navbar;

@@ -42,20 +42,17 @@ const AddNFTPage = ({ web3, account }) => {
         if (!contract || !web3 || !account) return;
 
         try {
-            // Call the smart contract function to mint the NFT
             await contract.methods
-                .mint(account) // Adjust this if your mint function requires more parameters
+                .mint(account)
                 .send({ from: account });
 
             alert('NFT successfully added!');
-            // Optionally, list it on the marketplace
-            // Assuming the tokenId is 0 for simplicity; adjust as necessary
+
             await marketplaceContract.methods
-                .listNFT(contract.options.address, 0, 0.1) // Example price; adjust as necessary
+                .listNFT(contract.options.address, 0, 0.1)
                 .send({ from: account, value: web3.utils.toWei('0.01', 'ether') });
 
             alert('NFT listed on marketplace!');
-            // Clear form fields
             setTitle('');
             setDescription('');
         } catch (error) {
@@ -65,27 +62,36 @@ const AddNFTPage = ({ web3, account }) => {
     };
 
     return (
-        <div>
-            <h1>Add New NFT</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="max-w-lg mx-auto my-10 p-8 bg-gray-900 text-white rounded-lg shadow-lg">
+            <h1 className="text-3xl font-bold mb-6 text-center">Add New NFT</h1>
+            <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                    <label>Title</label>
+                    <label className="block text-lg font-semibold mb-2">Title</label>
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
+                        className="w-full p-3 bg-gray-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        placeholder="Enter NFT title"
                     />
                 </div>
                 <div>
-                    <label>Description</label>
+                    <label className="block text-lg font-semibold mb-2">Description</label>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
+                        className="w-full p-3 bg-gray-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        placeholder="Enter NFT description"
+                        rows="4"
                     />
                 </div>
-                <button type="submit">Add NFT</button>
+                <button
+                    type="submit"
+                    className="w-full py-3 bg-purple-700 rounded-lg text-white font-bold hover:bg-purple-900 transition duration-300">
+                    Add NFT
+                </button>
             </form>
         </div>
     );

@@ -6,6 +6,9 @@ import HomePage from './components/HomePage';
 import AddNFTPage from './components/AddNFTPage';
 import MarketplacePage from './components/MarketplacePage';
 import NFTContract from './components/abis/NFTContract.json';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
 
 const App = () => {
   const [account, setAccount] = useState(null);
@@ -39,11 +42,13 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar account={account} onConnectWallet={connectWallet} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/marketplace" element={<MarketplacePage web3={web3} />} />
-        <Route path="/add-nft" element={<AddNFTPage web3={web3} />} />
+        <Route path='/login' element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/marketplace" element={<><Navbar account={account} onConnectWallet={connectWallet} /><MarketplacePage web3={web3} /></>} />
+        <Route path="/add-nft" element={<><Navbar account={account} onConnectWallet={connectWallet} /><AddNFTPage web3={web3} /></>} />
       </Routes>
     </Router>
   );
