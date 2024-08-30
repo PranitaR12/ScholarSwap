@@ -1,0 +1,20 @@
+{
+    "name": "educhain",
+    "version": "1.0.0",
+    "description": "Educhain Project for blockchain smart contracts using Hardhat",
+    "main": "index.js",
+    "scripts": {
+        "test": "hardhat test",
+        "start": "npx hardhat node"
+    },
+    "devDependencies": {
+        "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+        "hardhat": "^2.3.3"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@openzeppelin/contracts": "^5.0.2"
+    }
+}
